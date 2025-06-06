@@ -1,23 +1,27 @@
 # === OS spew ===
-.DS_Store          # macOS
-Thumbs.db          # Windows
+# macOS
+.DS_Store
+# Windows
+Thumbs.db
 
 # === build artifacts ===
 dist/
 build/
-*.class            # Java
+# Java
+*.class
 
 # === editor settings ===
 .vscode/
 .idea/
-*.swp              # Vim swap files
+# Vim swap files
+*.swp 
 
 # === secrets ===
 .env
 *.pem
 
 # === others ===
-.venv/               # Python virtual environments
+.venv/
 venv/
 env/
 .env/
