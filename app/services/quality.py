@@ -1,16 +1,28 @@
 import cv2
-from . import imaging
+from ..utils import imaging
+from ..core.config import get_settings
 
-BLUR_THR  = 100
-LIGHT_THR = 60
+
 
 def analyse(bytestr: bytes) -> dict:
+    """
+    Compute blur‐variance and mean‐intensity on a grayscale image.
+    Returns a dict:
+      {
+        "blurry":   bool, 
+        "underlit": bool,
+        "blur_var": float,
+        "mean":     float
+      }
+    Thresholds come from Settings.
+    """
     gray = imaging.load_gray(bytestr)
+    s = get_settings()
     blur_score  = cv2.Laplacian(gray, cv2.CV_64F).var()
-    light_mean  = gray.mean()
+    light_mean  = float(gray.mean())
     return {
-        "blurry":   blur_score < BLUR_THR,
-        "underlit": light_mean < LIGHT_THR,
+        "blurry":   bool(blur_score < s.blur_thr),
+        "underlit": bool(light_mean < s.light_thr),
         "blur_var": blur_score,
         "mean":     light_mean,
     }

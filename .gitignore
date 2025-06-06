@@ -25,3 +25,8 @@ build/
 venv/
 env/
 .env/
+__pycache__/
+.idea/
+.vscode/
+.env
+.pytest_cache/
