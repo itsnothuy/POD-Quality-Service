@@ -1,0 +1,23 @@
+# === OS spew ===
+.DS_Store          # macOS
+Thumbs.db          # Windows
+
+# === build artifacts ===
+dist/
+build/
+*.class            # Java
+
+# === editor settings ===
+.vscode/
+.idea/
+*.swp              # Vim swap files
+
+# === secrets ===
+.env
+*.pem
+
+# === others ===
+.venv/               # Python virtual environments
+venv/
+env/
+.env/
