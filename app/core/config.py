@@ -12,9 +12,17 @@ class Settings(BaseSettings):
     minio_root_user:         str = "minioadmin"
     minio_root_password:     str = "minioadmin"
     minio_bucket:            str = "pod-images"
+    
+    # Postgres
+    postgres_host:     str = "postgres"
+    postgres_port:     int = 5432
+    postgres_db:       str = "iqas"
+    postgres_user:     str = "iqas"
+    postgres_password: str = "iqas_pass"
 
     class Config:            # `.env` already in repo – keep using it
         env_file = ".env"
+        env_file_encoding = "utf-8"
 
 @lru_cache
 def get_settings() -> Settings:          # cheap singleton accessor

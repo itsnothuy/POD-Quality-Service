@@ -21,6 +21,7 @@ _s3 = boto3.session.Session().client(
     endpoint_url=s.minio_endpoint_internal,
     config=Config(signature_version="s3v4"),
 )
+
 def init_bucket() -> None:
     """
     Create the bucket if it doesn't exist. Raises on real errors.

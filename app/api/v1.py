@@ -1,25 +1,22 @@
+# app/api/v1.py
 from fastapi import APIRouter, UploadFile, File, HTTPException
-from ..services import quality
-from ..core.config import get_settings
+from app.services.quality import analyse
+from app.core.config import get_settings
+from typing import Optional
 
 router = APIRouter()
 
-@router.post("/validate")
+@router.post("/deliveries/v1/validate")
 async def validate(
     image: UploadFile = File(...),
-    blur_thr:  int | None = None,
-    light_thr:  int | None = None,
+    blur_thr: Optional[int] = None,
+    light_thr: Optional[int] = None,
 ):
-    """
-    1. Optionally override blur_thr / light_thr via query params. 
-    2. Run quality.analyse() on the raw bytes.
-    3. Return the JSON containing { blurry, underlit, blur_var, mean }.
-    """
     raw = await image.read()
     if not raw:
         raise HTTPException(status_code=400, detail="Empty upload")
 
-    # If the user passed new thresholds, override them in Settings (process‐wide).
+    # allow per-request overrides
     if blur_thr is not None or light_thr is not None:
         s = get_settings()
         if blur_thr  is not None:
@@ -28,8 +25,9 @@ async def validate(
             s.light_thr = light_thr
 
     try:
-        result = quality.analyse(raw)
+        result = analyse(raw)
     except Exception as exc:
         raise HTTPException(status_code=400, detail=str(exc))
+
     result["filename"] = image.filename
     return result
