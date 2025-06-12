@@ -30,3 +30,10 @@ __pycache__/
 .vscode/
 .env
 .pytest_cache/
+ 
+# ignore Terraform modules/state
+infra/.terraform/
+
+# ignore JS dependencies
+pod-dashboard/node_modules/
+

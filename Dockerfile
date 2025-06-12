@@ -1,10 +1,13 @@
 FROM python:3.12-slim
 
 # 1. System-level deps: OpenCV needs libglib & libsm…
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends libglib2.0-0 libsm6 libxext6 libxrender-dev && \
-    rm -rf /var/lib/apt/lists/*
-
+# RUN apt-get update && \
+#     apt-get install -y --no-install-recommends libglib2.0-0 libsm6 libxext6 libxrender-dev && \
+#     rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y \
+    libgl1-mesa-glx \
+    libglib2.0-0 \
+  && rm -rf /var/lib/apt/lists/*
 # 2. Python deps
 WORKDIR /app
 COPY requirements.txt .

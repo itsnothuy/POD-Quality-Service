@@ -27,7 +27,7 @@ from sqlalchemy.future import select
 
 router = APIRouter()
 
-@router.post("/deliveries/{delivery_id}/photo")
+@router.get("/deliveries/{delivery_id}")
 async def get_delivery(
     delivery_id: str,
     session: AsyncSession = Depends(get_session),

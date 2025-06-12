@@ -8,3 +8,7 @@ boto3
 tenacity
 httpx
 pydantic<2.0
+opencv-python-headless
+sqlalchemy
+sqlmodel
+asyncpg
