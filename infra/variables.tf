@@ -1,22 +1,22 @@
 variable "aws_region" {
+  description = "Region to deploy into"
   type        = string
-  description = "AWS region"
   default     = "us-east-1"
 }
 
 variable "ecr_image_tag" {
+  description = "Full ECR image URI incl. tag"
   type        = string
-  description = "ECR URI with tag, e.g. 123456789012.dkr.ecr.us-east-1.amazonaws.com/iqas:dev"
 }
 
 variable "db_pass" {
+  description = "RDS Postgres master password"
   type        = string
-  description = "Postgres master password"
   sensitive   = true
 }
 
 variable "minio_url" {
+  description = "Internal URL the API uses to reach MinIO"
   type        = string
-  description = "Internal MinIO endpoint"
   default     = "http://minio:9000"
 }

@@ -4,12 +4,11 @@ output "alb_dns" {
 }
 
 output "rds_endpoint" {
-  description = "RDS endpoint"
+  description = "PostgreSQL endpoint"
   value       = module.rds.db_instance_endpoint
 }
 
-output "cluster_arn" {
-  description = "ECS Cluster ARN"
+output "ecs_cluster_arn" {
+  description = "ECS cluster ARN"
   value       = module.ecs_cluster.arn
 }
-
